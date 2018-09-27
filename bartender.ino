@@ -35,7 +35,7 @@ void loop() {
    int previousRelayIndex = NUM_RELAYS;
    for (uint8_t i = 1; i <= NUM_RELAYS; i++) {
 
-      lcdDisplayMenu(prompt, 0, drinks[i-1], 0, true, true);
+      lcdDisplayMenu(prompt, drinks[i-1], true, true);
      turnOffRelay(previousRelayIndex);
      turnOnRelay(i);
      previousRelayIndex = i;
