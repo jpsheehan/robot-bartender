@@ -28,6 +28,8 @@ To install a library, follow the following steps:
 - Click the "Sketch" button on the menu bar
 - Click "Include Library"
 - Click "Manage Libraries..."
+- Search for the library using the search bar or scroll down
+- Click the "Install" button when you find the library you're looking for
 
 ## `lcd.ino`
 
