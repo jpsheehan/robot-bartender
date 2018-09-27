@@ -39,7 +39,7 @@ void lcdDisplay(const char* topString, uint8_t topStringOffset, const char* bott
   lcd.write(right);
 }
 
-void lcdDisplayMenu(const char* prompt, uint8_t promptOffset, const char* option, uint8_t optionOffset, bool isLeftArrowEnabled, bool isRightArrowEnabled) {
+void lcdDisplayMenu(const char* prompt const char* option, bool isLeftArrowEnabled, bool isRightArrowEnabled) {
   lcdDisplay(prompt, promptOffset, option, optionOffset, isLeftArrowEnabled ? LEFT_ARROW : ' ', isRightArrowEnabled ? RIGHT_ARROW : ' ');
 }
 
