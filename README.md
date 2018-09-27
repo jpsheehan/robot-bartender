@@ -18,8 +18,8 @@ The robot bartender is built using the following components:
 
 The following libraries must be installed in Arduino Studio for the program to run:
 
-| Library            | Author             | Version | Link
-| ------------------ | ------------------ | ------- | -----
+| Library            | Author             | Version | Link                                                             |
+| ------------------ | ------------------ | ------- | ---------------------------------------------------------------- |
 | LiquidCrystal I2C  | Frank de Brabander | 1.1.2   | [github.com](https://github.com/marcoschwartz/LiquidCrystal_I2C) |
 
 To install a library, follow the following steps:
@@ -48,12 +48,21 @@ This file requires that the **LiquidCrystal I2C** library by Frank de Brabander 
 
 The following functions are available from `lcd.ino`:
 
-- `void setupLcd()`: Must be called once during the setup phase. This function initializes the I2C connection to the LCD hardware.
-- `void lcdClear()`: Clears all characters from the LCD screen.
-- `void lcdPrintCentered(const char* string, uint8_t row)`: Prints `string` on the particular `row`. A `row` value of 0 represents the top row, while a `row` value of 1 represents the bottom row. If the string is longer than 16 characters it will "run off" the far edge of the screen.
-- `void lcdDisplayMenu(const char* prompt, const char* option, bool isLeftArrowEnabled, bool isRightArrowEnabled)`: Displays a menu for the user. The `prompt` appears centered on the top row, the `option` appears centered on the bottom row. The boolean values indicate whether or not arrows are to appear in the bottom corners of the screen. Because of the arrows, the `option` string can be a maximum of 14 characters while the `prompt` string can be the regular 16.
+### `void lcdSetup()`
+Must be called once during the setup phase. This function initializes the I2C connection to the LCD hardware.
 
-## `relays.ino`
+
+### `void lcdClear()`
+Clears all characters from the LCD screen.
+
+
+### `void lcdPrintCentered(const char* string, uint8_t row)`
+Prints `string` on the particular `row`. A `row` value of 0 represents the top row, while a `row` value of 1 represents the bottom row. If the string is longer than 16 characters it will "run off" the far edge of the screen.
+
+### `void lcdDisplayMenu(const char* prompt, const char* option, bool isLeftArrowEnabled, bool isRightArrowEnabled)`
+Displays a menu for the user. The `prompt` appears centered on the top row, the `option` appears centered on the bottom row. The boolean values indicate whether or not arrows are to appear in the bottom corners of the screen. Because of the arrows, the `option` string can be a maximum of 14 characters while the `prompt` string can be the regular 16.
+
+## `relay.ino`
 
 Contains functions for handling the relay module. The relay module is used to drive the solenoid valves while protecting the sensitive Arduino hardware from high currents. The relay module must be connected as follows:
 
@@ -74,8 +83,13 @@ Two of the relays are not connected as we only require 6 to drive the solenoid v
 
 The relays are actuated when the corresponding pin is pulled low. They are normally pulled high so that they do not activate the solenoid valves.
 
-The `relays.ino` file gives the following functions:
+The `relay.ino` file gives the following functions:
 
-- `setupRelays(uint8_t s, uint8_t pins[])`: Sets up the other relay functions to work with `s` relays on the specified `pins`. This must be called once in the setup function.
-- `turnOnRelay(uint8_t n)`: Turns on the `n`th relay. Relays are indexed from one so that the labels on the physical PCB match up.
-- `turnOffRelay(uint8_t n)`: Turns off the `n`th relay.
+### `relaySetup(uint8_t s, uint8_t pins[])`
+Sets up the other relay functions to work with `s` relays on the specified `pins`. This must be called once in the setup function.
+
+### `relayTurnOn(uint8_t n)`
+Turns on the `n`th relay. Relays are indexed from one so that the labels on the physical PCB match up.
+
+### `relayTurnOff(uint8_t n)`
+Turns off the `n`th relay. Relays are indexed from one so that the labels on the physical PCB match up.

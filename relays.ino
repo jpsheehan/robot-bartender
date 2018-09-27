@@ -6,9 +6,9 @@ static uint8_t *relays;
 // num_relays stores the number of relays that exist
 static uint8_t num_relays;
 
-// setupRelays initialises s relays on the pins supplied and turns them off
+// relaySetup initialises s relays on the pins supplied and turns them off
 // returns true if successful, false if unsuccessful
-bool setupRelays(uint8_t s, uint8_t pins[]) {
+bool relaySetup(uint8_t s, uint8_t pins[]) {
   relays = (uint8_t*)malloc(s * sizeof(uint8_t));
   if (relays == NULL) {
     return false;
@@ -19,7 +19,7 @@ bool setupRelays(uint8_t s, uint8_t pins[]) {
   for (uint8_t i = 0; i < s; i++) {
     relays[i] = pins[i];
     pinMode(relays[i], OUTPUT);
-    turnOffRelay(i + 1);
+    relayTurnOff(i + 1);
   }
   
   return true;
@@ -27,14 +27,14 @@ bool setupRelays(uint8_t s, uint8_t pins[]) {
 
 
 
-// turnOnRelay turns on the nth relay
+// relayTurnOn turns on the nth relay
 // relay numbers start at 1
-void turnOnRelay(uint8_t n) {
+void relayTurnOn(uint8_t n) {
   digitalWrite(relays[n - 1], LOW);
 }
 
-// turnOffRelay turns off the nth relay
+// relayTurnOff turns off the nth relay
 // relay numbers start at 1
-void turnOffRelay(uint8_t n) {
+void relayTurnOff(uint8_t n) {
   digitalWrite(relays[n - 1], HIGH);
 }

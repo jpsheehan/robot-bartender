@@ -5,8 +5,8 @@
 void setup() {
   // setup the relays
   uint8_t relayPins[NUM_RELAYS] = {11, 10, 9, 8, 7, 6};
-  setupRelays(NUM_RELAYS, relayPins);
-  setupLcd();
+  relaySetup(NUM_RELAYS, relayPins);
+  lcdSetup();
 }
 
 void loop() {
@@ -31,8 +31,8 @@ void loop() {
    for (uint8_t i = 1; i <= NUM_RELAYS; i++) {
 
       lcdDisplayMenu(prompt, drinks[i-1], true, true);
-     turnOffRelay(previousRelayIndex);
-     turnOnRelay(i);
+     relayTurnOff(previousRelayIndex);
+     relayTurnOn(i);
      previousRelayIndex = i;
      delay(1000);
    }

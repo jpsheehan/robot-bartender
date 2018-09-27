@@ -14,7 +14,7 @@ static uint8_t rightArrowData[8] = {0x08, 0x0C, 0x0E, 0x0F, 0x0E, 0x0C, 0x08};
 #define TOP 0
 #define BOTTOM 1
 
-void setupLcd() {
+void lcdSetup() {
   lcd.init();
   lcd.backlight();
   lcd.createChar(LEFT_ARROW, leftArrowData);
