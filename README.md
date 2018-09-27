@@ -8,10 +8,10 @@ TODO
 
 The robot bartender is built using the following components:
 
-| Part | Quantity | Link |
-| ---- | ---- | --- |
-| LCD Module | 1 | [aliexpress.com](https://www.aliexpress.com/item/1PCS-LCD-module-Blue-screen-IIC-I2C-1602-for-arduino-1602-LCD-UNO-r3-mega2560/32763867041.html) |
-| Relay Driver Module | 1 | [mindkits.co.nz](http://www.mindkits.co.nz/store/p/9318-8-Channel-Relay-Module-10A.aspx) |
+| Part                | Quantity | Link                                                                                                                                             |
+| ------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| LCD Module          | 1        | [aliexpress.com](https://www.aliexpress.com/item/1PCS-LCD-module-Blue-screen-IIC-I2C-1602-for-arduino-1602-LCD-UNO-r3-mega2560/32763867041.html) |
+| Relay Driver Module | 1        | [mindkits.co.nz](http://www.mindkits.co.nz/store/p/9318-8-Channel-Relay-Module-10A.aspx)                                                         |
 
 
 ## Installation
