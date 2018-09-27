@@ -11,7 +11,6 @@ void setup() {
 
 void loop() {
 
-    char message[16] = {0};
     char drinks[6][10] = {
         "Whisky",
         "Bourbon",
@@ -22,8 +21,6 @@ void loop() {
     };
 
     char prompt[] = "Select Drink";
-
-    int offset = 0;
 
     // turn each relay on in sequence. this is a simple demo
     // relays are accessed using one-based indexing as this is how they are labelled on the board
