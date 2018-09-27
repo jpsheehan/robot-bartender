@@ -2,7 +2,7 @@
 
 ## Introduction
 
-TODO
+The Robot Bartender is a final first pro year project for ENEL200 by Dylan Toms, Matt Payne and Jesse Sheehan. The design document for this project can be found [here](https://ucliveac-my.sharepoint.com/:b:/g/personal/jps111_uclive_ac_nz/EQTACNtkXvNOix1AuEiEOE8Bzz9IzEP73t7XxjSLdWC8gQ?e=EXix7b).
 
 ## Hardware
 
