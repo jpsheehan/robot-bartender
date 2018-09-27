@@ -1,8 +1,3 @@
-#include <Wire.h>
-
-// Needs the LiquidCrystal I2C library
-
-
 #include <stdbool.h>
 
 #define NUM_RELAYS 6

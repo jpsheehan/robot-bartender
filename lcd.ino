@@ -1,3 +1,5 @@
+// Needs the LiquidCrystal I2C library to be installed
+
 #include <LiquidCrystal_I2C.h>
 #include <string.h>
 
@@ -39,7 +41,7 @@ void lcdDisplay(const char* topString, uint8_t topStringOffset, const char* bott
   lcd.write(right);
 }
 
-void lcdDisplayMenu(const char* prompt const char* option, bool isLeftArrowEnabled, bool isRightArrowEnabled) {
-  lcdDisplay(prompt, promptOffset, option, optionOffset, isLeftArrowEnabled ? LEFT_ARROW : ' ', isRightArrowEnabled ? RIGHT_ARROW : ' ');
+void lcdDisplayMenu(const char* prompt, const char* option, bool isLeftArrowEnabled, bool isRightArrowEnabled) {
+  lcdDisplay(prompt, 0, option, 0, isLeftArrowEnabled ? LEFT_ARROW : ' ', isRightArrowEnabled ? RIGHT_ARROW : ' ');
 }
 
