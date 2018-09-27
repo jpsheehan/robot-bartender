@@ -15,33 +15,33 @@ static uint8_t rightArrowData[8] = {0x08, 0x0C, 0x0E, 0x0F, 0x0E, 0x0C, 0x08};
 #define BOTTOM 1
 
 void lcdSetup() {
-  lcd.init();
-  lcd.backlight();
-  lcd.createChar(LEFT_ARROW, leftArrowData);
-  lcd.createChar(RIGHT_ARROW, rightArrowData);
+    lcd.init();
+    lcd.backlight();
+    lcd.createChar(LEFT_ARROW, leftArrowData);
+    lcd.createChar(RIGHT_ARROW, rightArrowData);
 }
 
 void lcdClear() {
-  lcd.clear();
+    lcd.clear();
 }
 
 void lcdPrintCentered(const char* string, uint8_t row) {
-  lcd.setCursor((16 - strlen(string))/2, row);
-  lcd.print(string);
+    lcd.setCursor((16 - strlen(string))/2, row);
+    lcd.print(string);
 }
 
 void lcdDisplay(const char* topString, uint8_t topStringOffset, const char* bottomString, uint8_t bottomStringOffset, char left, char right) {
-  lcdClear();
-  lcdPrintCentered((topString + topStringOffset), TOP);
-  lcdPrintCentered((bottomString + bottomStringOffset), BOTTOM);
-  
-  lcd.setCursor(0,1);
-  lcd.write(left);
-  lcd.setCursor(15, 1);
-  lcd.write(right);
+    lcdClear();
+    lcdPrintCentered((topString + topStringOffset), TOP);
+    lcdPrintCentered((bottomString + bottomStringOffset), BOTTOM);
+
+    lcd.setCursor(0,1);
+    lcd.write(left);
+    lcd.setCursor(15, 1);
+    lcd.write(right);
 }
 
 void lcdDisplayMenu(const char* prompt, const char* option, bool isLeftArrowEnabled, bool isRightArrowEnabled) {
-  lcdDisplay(prompt, 0, option, 0, isLeftArrowEnabled ? LEFT_ARROW : ' ', isRightArrowEnabled ? RIGHT_ARROW : ' ');
+    lcdDisplay(prompt, 0, option, 0, isLeftArrowEnabled ? LEFT_ARROW : ' ', isRightArrowEnabled ? RIGHT_ARROW : ' ');
 }
 
