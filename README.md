@@ -42,7 +42,7 @@ Contains functions for handling the LCD module. The LCD module has a backlight a
 | SDA            | A4                |
 | SCL            | A5                |
 
-The SDA and SCL pins must be connected to A4 and A5 respect☺ively because those are the only two pins on the UNO capable of I2C communication (which this module employs).
+The SDA and SCL pins must be connected to A4 and A5 respectively because those are the only two pins on the UNO capable of I2C communication (which this module employs).
 
 This file requires that the **LiquidCrystal I2C** library by Frank de Brabander is installed (see above).
 
