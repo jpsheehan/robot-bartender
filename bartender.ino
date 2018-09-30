@@ -3,8 +3,7 @@
 
 #define NUM_RELAYS 6
 
-DMTimer buttonTimer(10 * 1000); // 10 ms timer
-
+DMTimer buttonTimer(1000000); // 1 s timer
 
 char drinks[6][10] = {
     "Whisky",
@@ -23,9 +22,11 @@ void setup() {
     relaySetup(NUM_RELAYS, relayPins);
     lcdSetup();
     buttonSetup(3, 2, 1);
+    proximitySetup(12, 13);
+    
     lcdClear();
     lcdPrintCentered("Welcome!", 0);
-    delay(2000);
+    delay(500);
 }
 
 void loop() {
@@ -58,5 +59,19 @@ void loop() {
 //      lcdClear();
 //    }
 //  }
+
+  if (buttonTimer.isTimeReached()) {
+    char message[16] = {0};
+    long distance = proximityGetDistance();
+
+    if (distance <= 0 || distance >= 200) {
+      snprintf(message, 16, "%s", "Out of range");
+    } else {
+      snprintf(message, 16, "%d cm", distance);
+    }
+    lcdClear();
+    lcdPrintCentered("Distance:", 0);
+    lcdPrintCentered(message, 1);
+  }
 
 }

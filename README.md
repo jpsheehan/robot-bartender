@@ -12,6 +12,7 @@ The robot bartender is built using the following components:
 | ------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | LCD Module          | 1        | [aliexpress.com](https://www.aliexpress.com/item/1PCS-LCD-module-Blue-screen-IIC-I2C-1602-for-arduino-1602-LCD-UNO-r3-mega2560/32763867041.html) |
 | Relay Driver Module | 1        | [mindkits.co.nz](http://www.mindkits.co.nz/store/p/9318-8-Channel-Relay-Module-10A.aspx)                                                         |
+| HC-SR04 Proximity Sensor | 1 | [sparkfun.com](https://www.sparkfun.com/products/13959) |
 
 
 ## Installation
@@ -119,3 +120,24 @@ Returns true if the centre button is currently being pressed.
 
 ### `bool buttonRightPressed()`
 Returns true if the right button is currently being pressed.
+
+## `proximity.ino`
+
+Contains functions for interacting with the ultra-sonic proximity sensor. The sensor is connected directly to the Arduino using the below pinout:
+
+| Proximity Sensor Pin | Arduino Board Pin |
+| -------------------- | ----------------- |
+| Gnd                  | Gnd               |
+| Echo                 | 12                |
+| Trigger              | 13                |
+| VCC                  | +5V               |
+
+When the distance is required, the Arduino sends out a clean 10ms pulse and the time it takes for the signal to bounce back is converted into a distance.
+
+The `proxitity.ino` file contains the following functions:
+
+### `proximitySetup(uint8_t echo, uint8_t trigger)`
+Initialises the echo and trigger pins of the ultrasonic sensor.
+
+### `proximityDistanceGet()`
+Returns the measured distance in centimeters. If a value of zero is returned it means that the sensor could not detect and object (out of range).
