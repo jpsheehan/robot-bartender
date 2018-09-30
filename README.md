@@ -21,6 +21,7 @@ The following libraries must be installed in Arduino Studio for the program to r
 | Library            | Author             | Version | Link                                                             |
 | ------------------ | ------------------ | ------- | ---------------------------------------------------------------- |
 | LiquidCrystal I2C  | Frank de Brabander | 1.1.2   | [github.com](https://github.com/marcoschwartz/LiquidCrystal_I2C) |
+| DMTimer            | Nicolas Simonnet   | 1.0.0   | [github.com](https://github.com/toxnico/DMTimer)                 |
 
 To install a library, follow the following steps:
 
@@ -93,3 +94,28 @@ Turns on the `n`th relay. Relays are indexed from one so that the labels on the 
 
 ### `relayTurnOff(uint8_t n)`
 Turns off the `n`th relay. Relays are indexed from one so that the labels on the physical PCB match up.
+
+## `button.ino`
+
+Contains functions for handling the three buttons on the front of the machine. The buttons are connected to the Arduino via one 10K Ohm pulldown resistor each so that floating voltage is mitigated. When the button is pressed the Arduino senses a high input, when the button is released the Arduino senses a low input. The buttons are to be connected as follows:
+
+| Button Pin    | Arduino Board Pin |
+| ------------- | ----------------- |
+| Shared VCC    | +5V               |
+| Left Button   | 3                 |
+| Centre Button | 2                 |
+| Right Button  | 1                 |
+
+The `button.ino` file gives the following functions:
+
+### `void buttonSetup(uint8_t left, uint8_t centre, uint8_t right)`
+Sets up the buttons to work as digital inputs.
+
+### `bool buttonLeftPressed()`
+Returns true if the left button is currently being pressed.
+
+### `bool buttonCentrePressed()`
+Returns true if the centre button is currently being pressed.
+
+### `bool buttonRightPressed()`
+Returns true if the right button is currently being pressed.
