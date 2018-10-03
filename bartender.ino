@@ -25,6 +25,23 @@ void loop() {
 
   // testLed();
   //modeDisplayDistance();
+<<<<<<< HEAD
    modeDisplayButtons();
    
+=======
+   //modeDisplayButtons();
+   // buzzerTest();
+  static bool state = false;
+   for (uint8_t i = 1; i <= 6; i++) {
+      if (state) {
+        relayTurnOff(i);
+      } else {
+      relayTurnOn(i);
+      }
+   }
+   
+     state = !state;
+     delay(1000);
+
+>>>>>>> 599b00518d82449063773598fe47125cc5a58702
 }

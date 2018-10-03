@@ -39,9 +39,10 @@ void relayTurnOn(uint8_t n) {
     digitalWrite(relays[n - 1], RELAY_ON);
 }
 
-// relayTurnOff turns off the nth relay. relay numbers start at 1.
+// relayTurnOff turns off the nth relay safely. relay numbers start at 1.
 // 
 // n is the relay number to turn off.
 void relayTurnOff(uint8_t n) {
     digitalWrite(relays[n - 1], RELAY_OFF);
+    delay(10);
 }
