@@ -49,7 +49,7 @@ void modeDebugMenu() {
   uint8_t optionIndex = 0;
   
   char options[DEBUG_NUM_OPTIONS][16] = {
-    "Main Menu",
+    "Exit",
     "Glass LED On",
     "Glass LED Off",
     "Bottle LED On",
@@ -57,7 +57,7 @@ void modeDebugMenu() {
   };
 
   void (*optionFunctions[DEBUG_NUM_OPTIONS])() = {
-    mainMenu,
+    NULL,   // this is a special value, it will exit the debug menu
     glassLedOn,
     glassLedOff,
     bottleLedOn,
@@ -86,8 +86,12 @@ void modeDebugMenu() {
       }
 
       if (buttonCentrePressed()) {
-        (*optionFunctions[optionIndex])();
-        refreshDebugMenu(options[optionIndex]);
+        if (optionIndex == 0) {
+          return;
+        } else {
+          (*optionFunctions[optionIndex])();
+          refreshDebugMenu(options[optionIndex]);
+        }
       }
   }
 }

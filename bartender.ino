@@ -11,6 +11,12 @@ void displayWelcomeMessage() {
     successBuzzer();
     
     delay(1000);
+
+    // Launch the debug menu if the left and right buttons are held down
+    if (buttonLeftPressedRaw() && buttonRightPressedRaw()) {
+      buttonUpdate();
+      modeDebugMenu();
+    }
 }
 
 void setup() {
@@ -27,13 +33,7 @@ void setup() {
 }
 
 void loop() {
-
-  // testLed();
-  // modeDisplayDistance();
-   //modeDisplayButtons();
-   // buzzerTest();
-   // relayTestIndividual();
-   modeDebugMenu();
+   mainMenu();
 }
 
 void mainMenu() {
