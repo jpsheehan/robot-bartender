@@ -18,7 +18,7 @@ void glassLedOff() {
 }
 
 void testLed() {
-  bottledLedOn();
+  bottleLedOn();
   delay(500);
   bottleLedOff();
   delay(500);

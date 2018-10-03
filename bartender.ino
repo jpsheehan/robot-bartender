@@ -1,6 +1,6 @@
 #include <stdbool.h>
 
-#define NUM_RELAYS 6
+#define NUM_RELAYS 8
 
 char prompt[] = "Select Drink";
 
@@ -23,7 +23,6 @@ void setup() {
 void loop() {
 
   testLed();
-  //
-  modeDisplayDistance();
+  //modeDisplayDistance();
 
 }

@@ -19,7 +19,7 @@ void modeDisplayDistance() {
   }
 }
 
-DMTimer timerDisplayButtons(10000) // 10ms timer
+DMTimer timerDisplayButtons(10000); // 10ms timer
 
 void modeDisplayButtons() {
     if (timerDisplayButtons.isTimeReached()) {
