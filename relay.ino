@@ -9,6 +9,8 @@ static uint8_t num_relays;
 #define RELAY_OFF HIGH
 #define RELAY_ON LOW
 
+#define RELAY_SAFETY_TIMEOUT 50
+
 // relaySetup initialises s relays on the pins supplied and turns them off.
 // 
 // s is the length of the pins array.
@@ -44,5 +46,29 @@ void relayTurnOn(uint8_t n) {
 // n is the relay number to turn off.
 void relayTurnOff(uint8_t n) {
     digitalWrite(relays[n - 1], RELAY_OFF);
-    delay(10);
+    delay(RELAY_SAFETY_TIMEOUT);
 }
+
+void relayTestIndividual() {
+   for (uint8_t i = 1; i <= 6; i++) {
+      relayTurnOn(i);
+      delay(1000);
+      relayTurnOff(i);
+   }
+     
+}
+
+void relayTestStress() {
+  static bool state = false;
+   for (uint8_t i = 1; i <= 6; i++) {
+      if (state) {
+        relayTurnOff(i);
+      } else {
+      relayTurnOn(i);
+      }
+   }
+   
+     state = !state;
+     delay(1000);
+}
+
