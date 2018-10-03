@@ -4,6 +4,8 @@
 
 char prompt[] = "Select Drink";
 
+
+
 void displayWelcomeMessage() {
     lcdClear();
     lcdPrintCentered("Welcome to the", 0);
@@ -35,8 +37,26 @@ void setup() {
 void loop() {
    mainMenu();
 }
+char drinks[6][17] = {
+    "Whiskey and Coke",
+    "Mojito",
+    "Rum and Coke",
+    "Snakebite",
+    "Maple Nut Shot",
+    "Sweet Daquiri"
+    };
+
+static void refreshDrinkMenu(const char* option) {
+  lcdClear();
+  lcdDisplayMenu("Select Drink", option, true, true);
+  }
+
+char* currentDrink = drinks[0];
+
 
 void mainMenu() {
-  
+ 
 }
+
+
 
