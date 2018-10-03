@@ -41,3 +41,22 @@ void modeDisplayButtons() {
    }
     }
 }
+
+void modeDebug() {
+  uint8_t optionIndex = 0;
+  char options[][17] = {
+    "Main Menu",
+    "Glass LED On",
+    "Glass LED Off",
+    "Bottle LED On",
+    "Bottle LED Off"
+  };
+  
+  lcdClear();
+  lcdDisplayMenu("Debug Menu", options[optionIndex], true, true);
+  
+  while (1) {
+      
+  }
+}
+
