@@ -1,6 +1,8 @@
 #define bottleLeds 7
 #define glassLeds 8
 
+// these functions do exactly what they say on the tin
+
 void bottleLedOn() {
   relayTurnOn(bottleLeds);
 }
