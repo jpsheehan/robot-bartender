@@ -22,7 +22,7 @@ void setup() {
 
 void loop() {
 
-  testLed();
-  //modeDisplayDistance();
+  // testLed();
+  modeDisplayDistance();
 
 }

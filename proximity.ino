@@ -15,9 +15,8 @@ void proximitySetup(uint8_t echo, uint8_t trigger) {
 
 // proximityGetDistance returns the detected distance in cm
 //   if the returned distance is zero, the object is out of range
-float proximityGetDistance() {
-  long duration;
-  float distance;
+long proximityGetDistance() {
+  long duration, distance;
 
   digitalWrite(triggerPin, LOW);
   delayMicroseconds(2);

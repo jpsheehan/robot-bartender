@@ -6,12 +6,12 @@ DMTimer timerDisplayDistance(1000000); // 1 s timer
 void modeDisplayDistance() {
   if (timerDisplayDistance.isTimeReached()) {
     char message[16] = {0};
-    float distance = proximityGetDistance();
+    long distance = proximityGetDistance();
 
     if (distance <= 0 || distance >= 200) {
       snprintf(message, 16, "%s", "Out of range");
     } else {
-      snprintf(message, 16, "%.2f cm", distance);
+      snprintf(message, 16, "%.d cm", distance);
     }
     lcdClear();
     lcdPrintCentered("Distance:", 0);
