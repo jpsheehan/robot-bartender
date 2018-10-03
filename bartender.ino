@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#define BUZZER_PIN 3
 
 #define NUM_RELAYS 8
 
@@ -15,7 +16,7 @@ void setup() {
     uint8_t relayPins[NUM_RELAYS] = {11, 10, 9, 8, 7, 6, 5, 4};
     relaySetup(NUM_RELAYS, relayPins);
     lcdSetup();
-    buttonSetup(3, 2, 1);
+    buttonSetup(2, 1, 0);
     proximitySetup(12, 13);
     
 }
@@ -23,6 +24,6 @@ void setup() {
 void loop() {
 
   // testLed();
-  modeDisplayDistance();
-  // modeDisplayButtons();
+  //modeDisplayDistance();
+   modeDisplayButtons();
 }
