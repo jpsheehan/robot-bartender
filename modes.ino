@@ -14,7 +14,11 @@ void modeDisplayDistance() {
       snprintf(message, 16, "%.d cm", distance);
     }
     lcdClear();
-    lcdPrintCentered("Distance:", 0);
+    if (cupInPlace(distance)) {
+      lcdPrintCentered("Glass in place", 0);
+    } else {
+      lcdPrintCentered("Place Glass", 0);
+    }
     lcdPrintCentered(message, 1);
   }
 }

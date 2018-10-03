@@ -1,3 +1,5 @@
+#define MINIMUM_DISTANCE 4
+#define MAXIMUM_DISTANCE 6
 
 static uint8_t triggerPin;
 static uint8_t echoPin;
@@ -26,5 +28,13 @@ long proximityGetDistance() {
   duration = pulseIn(echoPin, HIGH);
   distance = (duration/2.00f) / 29.1f;
   return distance;
+}
+
+bool cupInPlace(long distance) {
+  if (distance >= MINIMUM_DISTANCE && distance <= MAXIMUM_DISTANCE) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
