@@ -22,6 +22,8 @@ void setup() {
 
 void loop() {
 
+  testLed();
+  //
   modeDisplayDistance();
 
 }
