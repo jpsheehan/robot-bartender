@@ -23,10 +23,7 @@ void modeDisplayDistance() {
   }
 }
 
-DMTimer timerDisplayButtons(10000); // 10ms timer
-
 void modeDisplayButtons() {
-    if (timerDisplayButtons.isTimeReached()) {
         if (buttonLeftPressed()) {
      lcdPrintCentered("Left", 0);
    }
@@ -39,24 +36,59 @@ void modeDisplayButtons() {
    else {
      lcdClear();
    }
-    }
 }
 
-void modeDebug() {
+#define DEBUG_NUM_OPTIONS 5
+
+static void refreshDebugMenu(const char* option) {
+  lcdClear();
+  lcdDisplayMenu("Debug Menu", option, true, true);
+}
+
+void modeDebugMenu() {
   uint8_t optionIndex = 0;
-  char options[][17] = {
+  
+  char options[DEBUG_NUM_OPTIONS][16] = {
     "Main Menu",
     "Glass LED On",
     "Glass LED Off",
     "Bottle LED On",
     "Bottle LED Off"
   };
+
+  void (*optionFunctions[DEBUG_NUM_OPTIONS])() = {
+    mainMenu,
+    glassLedOn,
+    glassLedOff,
+    bottleLedOn,
+    bottleLedOff
+  };
   
-  lcdClear();
-  lcdDisplayMenu("Debug Menu", options[optionIndex], true, true);
+  refreshDebugMenu(options[optionIndex]);
   
   while (1) {
-      
+      buttonUpdate();
+
+      if (buttonLeftPressed()) {
+        optionIndex -= 1;
+        if (optionIndex >= DEBUG_NUM_OPTIONS) {
+          optionIndex = DEBUG_NUM_OPTIONS - 1;
+        }
+        refreshDebugMenu(options[optionIndex]);
+      }
+
+      if (buttonRightPressed()) {
+        optionIndex += 1;
+        if (optionIndex >= DEBUG_NUM_OPTIONS) {
+          optionIndex = 0;
+        }
+        refreshDebugMenu(options[optionIndex]);
+      }
+
+      if (buttonCentrePressed()) {
+        (*optionFunctions[optionIndex])();
+        refreshDebugMenu(options[optionIndex]);
+      }
   }
 }
 

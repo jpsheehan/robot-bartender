@@ -31,6 +31,12 @@ void loop() {
   // testLed();
   // modeDisplayDistance();
    //modeDisplayButtons();
-   buzzerTest();
+   // buzzerTest();
    // relayTestIndividual();
+   modeDebugMenu();
 }
+
+void mainMenu() {
+  
+}
+
