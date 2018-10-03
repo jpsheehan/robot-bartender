@@ -19,16 +19,28 @@ void buttonSetup(uint8_t left, uint8_t centre, uint8_t right) {
 
 // buttonLeftPressed returns true if the left button is pressed
 bool buttonLeftPressed() {
-  return digitalRead(leftButtonPin) == HIGH;
+  if (digitalRead(leftButtonPin) == HIGH) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // buttonRightPressed returns true if the right button is pressed
 bool buttonRightPressed() {
-  return digitalRead(rightButtonPin) == HIGH;
+  if (digitalRead(rightButtonPin) == HIGH) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // buttonCentrePressed returns true if the centre button is pressed
 bool buttonCentrePressed() {
-  return digitalRead(centreButtonPin) == HIGH;
+  if (digitalRead(centreButtonPin) == HIGH) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
