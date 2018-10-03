@@ -103,9 +103,9 @@ Contains functions for handling the three buttons on the front of the machine. T
 | Button Pin    | Arduino Board Pin |
 | ------------- | ----------------- |
 | Shared VCC    | +5V               |
-| Left Button   | 3                 |
-| Centre Button | 2                 |
-| Right Button  | 1                 |
+| Left Button   | 2                 |
+| Centre Button | 1                 |
+| Right Button  | 0                 |
 
 The `button.ino` file gives the following functions:
 
