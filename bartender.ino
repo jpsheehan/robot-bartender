@@ -27,9 +27,14 @@ void loop() {
 
   // testLed();
   //modeDisplayDistance();
+<<<<<<< HEAD
+   modeDisplayButtons();
+   
+=======
    //modeDisplayButtons();
    // buzzerTest();
    relayTestIndividual();
   
 
+>>>>>>> 599b00518d82449063773598fe47125cc5a58702
 }
