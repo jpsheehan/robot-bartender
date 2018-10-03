@@ -25,5 +25,6 @@ void loop() {
 
   // testLed();
   //modeDisplayDistance();
-   modeDisplayButtons();
+   //modeDisplayButtons();
+   buzzerTest();
 }

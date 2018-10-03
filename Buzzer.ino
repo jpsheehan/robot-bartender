@@ -25,6 +25,15 @@ void failureBuzzer() {
   tone(BUZZER_PIN, 131);
   delay(350);
   noTone(BUZZER_PIN);
-  
+}
+
+void buzzerTest() {
+  if (buttonLeftPressed()) {
+    buttonBuzzer();
+  } else if (buttonRightPressed()) {
+    successBuzzer();
+  } else if (buttonCentrePressed()) {
+    failureBuzzer();
+  }
 }
 
