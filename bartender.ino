@@ -10,9 +10,6 @@ void displayWelcomeMessage() {
     delay(500);
 }
 
-// we need to add BourboRum
-
-
 void setup() {
     // setup the relays
     uint8_t relayPins[NUM_RELAYS] = {11, 10, 9, 8, 7, 6, 5, 4};
