@@ -38,11 +38,20 @@ void modeDisplayButtons() {
    }
 }
 
-#define DEBUG_NUM_OPTIONS 5
+#define DEBUG_NUM_OPTIONS 6
 
 static void refreshDebugMenu(const char* option) {
   lcdClear();
   lcdDisplayMenu("Debug Menu", option, true, true);
+}
+
+void testProgress() {
+  lcdClear();
+  for (int i = 0; i <= 100; i+=1) {
+    lcdDisplayProgress(i, 0);
+    lcdDisplayProgress(i, 1);
+    delay(500);
+  }
 }
 
 void modeDebugMenu() {
@@ -53,7 +62,8 @@ void modeDebugMenu() {
     "Glass LED On",
     "Glass LED Off",
     "Bottle LED On",
-    "Bottle LED Off"
+    "Bottle LED Off",
+    "Test Progress"
   };
 
   void (*optionFunctions[DEBUG_NUM_OPTIONS])() = {
@@ -61,7 +71,8 @@ void modeDebugMenu() {
     glassLedOn,
     glassLedOff,
     bottleLedOn,
-    bottleLedOff
+    bottleLedOff,
+    testProgress
   };
   
   refreshDebugMenu(options[optionIndex]);

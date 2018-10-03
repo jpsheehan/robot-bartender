@@ -10,6 +10,14 @@ static LiquidCrystal_I2C lcd(0x27, 16, 2);
 // defines 1 to be associated with the right arrow character
 #define RIGHT_ARROW 1
 
+// define numbers to be associated with the percentage bars
+#define PERCENT_0 2
+#define PERCENT_20 3
+#define PERCENT_40 4
+#define PERCENT_60 5
+#define PERCENT_80 6
+#define PERCENT_100 7
+
 // defines a macro for the top row of the display
 #define TOP_ROW 0
 
@@ -21,11 +29,23 @@ static LiquidCrystal_I2C lcd(0x27, 16, 2);
 void lcdSetup() {
     uint8_t leftArrowData[8] = {0x02, 0x06, 0x0E, 0x1E, 0x0E, 0x06, 0x02};
     uint8_t rightArrowData[8] = {0x08, 0x0C, 0x0E, 0x0F, 0x0E, 0x0C, 0x08};
+    uint8_t percent0Data[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    uint8_t percent20Data[8] = {0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10};
+    uint8_t percent40Data[8] = {0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18};
+    uint8_t percent60Data[8] = {0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C};
+    uint8_t percent80Data[8] = {0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E};
+    uint8_t percent100Data[8] = {0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F};
 
     lcd.init();
     lcd.backlight();
     lcd.createChar(LEFT_ARROW, leftArrowData);
     lcd.createChar(RIGHT_ARROW, rightArrowData);
+    lcd.createChar(PERCENT_0, percent0Data);
+    lcd.createChar(PERCENT_20, percent20Data);
+    lcd.createChar(PERCENT_40, percent40Data);
+    lcd.createChar(PERCENT_60, percent60Data);
+    lcd.createChar(PERCENT_80, percent80Data);
+    lcd.createChar(PERCENT_100, percent100Data);
 }
 
 // lcdClear clears the LCD of any text.
@@ -83,5 +103,17 @@ void lcdDisplay(const char* topString, uint8_t topStringOffset, const char* bott
 //   the bottom right corner of the LCD. If false, no character is displayed.
 void lcdDisplayMenu(const char* prompt, const char* option, bool isLeftArrowEnabled, bool isRightArrowEnabled) {
     lcdDisplay(prompt, 0, option, 0, isLeftArrowEnabled ? LEFT_ARROW : ' ', isRightArrowEnabled ? RIGHT_ARROW : ' ');
+}
+
+void lcdDisplayProgress(uint8_t percentage, uint8_t row) {
+  uint8_t wholeBlocks = percentage / 100.0 * 16;
+  uint8_t leftOverBlocks = (percentage / 100.0 - wholeBlocks / 16.0) * 5.0;
+  
+  for (int i = 0; i <= wholeBlocks; i++) {
+    lcd.setCursor(i, row);
+    lcd.write(PERCENT_100);
+  }
+  lcd.setCursor(wholeBlocks + 1, row);
+  lcd.write(PERCENT_0 + leftOverBlocks);
 }
 
