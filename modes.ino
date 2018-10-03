@@ -48,7 +48,7 @@ static void refreshDebugMenu(const char* option) {
 void modeDebugMenu() {
   uint8_t optionIndex = 0;
   
-  char options[DEBUG_NUM_OPTIONS][16] = {
+  char options[DEBUG_NUM_OPTIONS][17] = {
     "Exit",
     "Glass LED On",
     "Glass LED Off",
