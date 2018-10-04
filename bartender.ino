@@ -30,18 +30,18 @@ void setup() {
     buttonSetup(2, 1, 0); // set the buttons up on pins 0, 1 and 2
     proximitySetup(12, 13); // set the proximity sensor up on pins 12 and 13
     buzzerSetup(3); // set the buzzer up on pin 3
-    bottleLedOn();
+    // bottleLedOn();
     displayWelcomeMessage();
-    bottleLedOff();
+    // bottleLedOff();
 }
 
 void loop() {
    mainMenu();
 }
 char drinks[6][17] = {
-    "Whiskey and Coke",
+    "Whiskey & Coke",
     "Mojito",
-    "Rum and Coke",
+    "Rum & Coke",
     "Snakebite",
     "Maple Nut Shot",
     "Sweet Daquiri"
@@ -130,11 +130,16 @@ void mainMenu() {
       if (foundCup) {
         glassLedOn();
         successBuzzer();
+        lcdClear();
+        lcdPrintCentered("Pouring", 0);
+        lcdPrintCentered(drinks[drinkIndex], 1);
         timeForADrink(drinkIndex);
     } else { 
       failureBuzzer();
       glassLedOff();
     }
+    
+       refreshDrinkMenu(drinks[drinkIndex]);
 }
   }
 }
