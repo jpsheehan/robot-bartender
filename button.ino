@@ -61,6 +61,14 @@ bool buttonCentrePressed() {
   }
 }
 
+bool buttonAnyPressed() {
+  return buttonLeftPressed() || buttonRightPressed() || buttonCentrePressed();
+}
+
+bool buttonAnyPressedRaw() {
+  return buttonLeftPressedRaw() || buttonRightPressedRaw() || buttonCentrePressedRaw();
+}
+
 // buttonLeftPressed returns true if the left button is pressed
 bool buttonLeftPressedRaw() {
   if (digitalRead(leftButtonPin) == HIGH) {

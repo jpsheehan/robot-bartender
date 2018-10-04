@@ -38,7 +38,7 @@ void modeDisplayButtons() {
    }
 }
 
-#define DEBUG_NUM_OPTIONS 6
+#define DEBUG_NUM_OPTIONS 13
 
 static void refreshDebugMenu(const char* option) {
   lcdClear();
@@ -63,7 +63,14 @@ void modeDebugMenu() {
     "Glass LED Off",
     "Bottle LED On",
     "Bottle LED Off",
-    "Test Progress"
+    "Test Progress",
+    "Manual 1",
+    "Manual 2",
+    "Manual 3",
+    "Manual 4",
+    "Manual 5",
+    "Manual 6",
+    "Stress Test 1",
   };
 
   void (*optionFunctions[DEBUG_NUM_OPTIONS])() = {
@@ -72,7 +79,14 @@ void modeDebugMenu() {
     glassLedOff,
     bottleLedOn,
     bottleLedOff,
-    testProgress
+    testProgress,
+    NULL, // manual pour 1
+    NULL, // manual pour 2
+    NULL, // manual pour 3
+    NULL, // manual pour 4
+    NULL, // manual pour 5
+    NULL, // manual pour 6
+    relayTestStress,
   };
   
   refreshDebugMenu(options[optionIndex]);
@@ -97,11 +111,57 @@ void modeDebugMenu() {
       }
 
       if (buttonCentrePressed()) {
-        if (optionIndex == 0) {
-          return;
-        } else {
+        switch (optionIndex) {
+          case 0:
+            return;
+            break;
+           case 6: // manual pour 1
+            relayTurnOn(1);
+            while (buttonCentrePressedRaw()) {
+              continue;
+            }
+            relayTurnOff(1);
+            break;
+           case 7: // manual pour 2
+            relayTurnOn(2);
+            while (buttonCentrePressedRaw()) {
+              continue;
+            }
+            relayTurnOff(2);
+            break;
+           case 8: // manual pour 3
+            relayTurnOn(3);
+            while (buttonCentrePressedRaw()) {
+              continue;
+            }
+            relayTurnOff(3);
+            break;
+           case 9: // manual pour 4
+            relayTurnOn(4);
+            while (buttonCentrePressedRaw()) {
+              continue;
+            }
+            relayTurnOff(4);
+            break;
+           case 10: // manual pour 5
+            relayTurnOn(5);
+            while (buttonCentrePressedRaw()) {
+              continue;
+            }
+            relayTurnOff(5);
+            break;
+           case 11: // manual pour 6
+            relayTurnOn(6);
+            while (buttonCentrePressedRaw()) {
+              continue;
+            }
+            relayTurnOff(6);
+            break;
+            default:
           (*optionFunctions[optionIndex])();
           refreshDebugMenu(options[optionIndex]);
+          break;
+            
         }
       }
   }

@@ -49,6 +49,12 @@ void relayTurnOff(uint8_t n) {
     delay(RELAY_SAFETY_TIMEOUT);
 }
 
+void relayTurnOffAll() {
+  for (uint8_t i = 1; i <= num_relays; i++) {
+    relayTurnOff(i);
+  }
+}
+
 void relayTestIndividual() {
    for (uint8_t i = 1; i <= 6; i++) {
       relayTurnOn(i);
@@ -59,7 +65,12 @@ void relayTestIndividual() {
 }
 
 void relayTestStress() {
-  static bool state = false;
+  bool state = false;
+  lcdClear();
+  lcdPrintCentered("Stress Test 1", 0);
+  lcdPrintCentered("Hold any button", 1);
+  
+  while (!buttonAnyPressed()) {
    for (uint8_t i = 1; i <= 6; i++) {
       if (state) {
         relayTurnOff(i);
@@ -70,5 +81,8 @@ void relayTestStress() {
    
      state = !state;
      delay(1000);
+    buttonUpdate();
+  }
+  relayTurnOffAll();
 }
 
