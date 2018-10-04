@@ -73,25 +73,27 @@ void timeForADrink(int option) {
 
 
 void mainMenu() {
-
+   refreshDrinkMenu(drinks[drinkIndex]);
   while(1) {
     buttonUpdate();
-    refreshDrinkMenu(drinks[drinkIndex]);
     if (buttonLeftPressed()) {
       buttonBuzzer();
       drinkIndex -= 1;
       if (drinkIndex < 0) {
         drinkIndex = 5;
       }
+       refreshDrinkMenu(drinks[drinkIndex]);
     } else if (buttonRightPressed()) {
       buttonBuzzer();
       drinkIndex += 1;
       if (drinkIndex > 5) {
         drinkIndex = 0;
       }
+       refreshDrinkMenu(drinks[drinkIndex]);
     } else if (buttonCentrePressed()) {
-      successBuzzer();
+      
       if (proximityIsCupDetected()) {
+        successBuzzer();
       timeForADrink(drinkIndex);
     } else { 
       failureBuzzer();
