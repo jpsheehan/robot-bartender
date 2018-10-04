@@ -105,15 +105,4 @@ void lcdDisplayMenu(const char* prompt, const char* option, bool isLeftArrowEnab
     lcdDisplay(prompt, 0, option, 0, isLeftArrowEnabled ? LEFT_ARROW : ' ', isRightArrowEnabled ? RIGHT_ARROW : ' ');
 }
 
-void lcdDisplayProgress(uint8_t percentage, uint8_t row) {
-  uint8_t wholeBlocks = percentage / 100.0 * 16;
-  uint8_t leftOverBlocks = (percentage / 100.0 - wholeBlocks / 16.0) * 5.0;
-  
-  for (int i = 0; i <= wholeBlocks; i++) {
-    lcd.setCursor(i, row);
-    lcd.write(PERCENT_100);
-  }
-  lcd.setCursor(wholeBlocks + 1, row);
-  lcd.write(PERCENT_0 + leftOverBlocks);
-}
 
