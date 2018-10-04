@@ -51,20 +51,21 @@ static void refreshDrinkMenu(const char* option) {
   lcdDisplayMenu("Select Drink", option, true, true);
   }
 
-char* currentDrink = drinks[0];
+// char* currentDrink = drinks[0];
+int drinkIndex = 0;
 
-void timeForADrink(const char* option) {
-  if (option == drinks[0]) {
+void timeForADrink(int option) {
+  if (option == 0) {
     whiskeyAndCoke();
-  } else if (option == drinks[1]) {
+  } else if (option == 1) {
     mojito();
-  } else if (option == drinks[2]) {
+  } else if (option == 2) {
     rumAndCoke();
-  } else if (option == drinks[3]) {
+  } else if (option == 3) {
     snakebite();
-  } else if (option == drinks[4]) {
+  } else if (option == 4) {
     mapleNutShot();
-  } else if (option == drinks[5]) {
+  } else if (option == 5) {
     sweetDaquiri();
   }
 }
@@ -74,20 +75,24 @@ void timeForADrink(const char* option) {
 void mainMenu() {
 
   while(1) {
-    refreshDrinkMenu(currentDrink);
-    if (buttonLeftPressed && currentDrink == drinks[0]) {
-      currentDrink = drinks[5];
-    } else if (buttonRightPressed && currentDrink == drinks[5]) {
-      currentDrink = drinks[0];
-    } else if (buttonLeftPressed) {
-      currentDrink - 1;
-    } else if (buttonRightPressed) {
-      currentDrink + 1;
-    } else if (buttonCentrePressed) {
-      timeForADrink(currentDrink);
-    }
-      
-      
+    buttonUpdate();
+    refreshDrinkMenu(drinks[drinkIndex]);
+    if (buttonLeftPressed()) {
+      buttonBuzzer();
+      drinkIndex -= 1;
+      if (drinkIndex < 0) {
+        drinkIndex = 5;
+      }
+    } else if (buttonRightPressed()) {
+      buttonBuzzer();
+      drinkIndex += 1;
+      if (drinkIndex > 5) {
+        drinkIndex = 0;
+      }
+    } else if (buttonCentrePressed()) {
+      successBuzzer();
+      timeForADrink(drinkIndex);
+    } 
     }
 }
 
