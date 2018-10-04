@@ -13,36 +13,36 @@ void buzzerSetup(uint8_t buzzer) {
   pinMode(buzzer_pin, OUTPUT);
 }
 
-void playTone(uint16_t frequency, uint16_t duration) {
+void buzzerPlay(uint16_t frequency, uint16_t duration) {
   tone(buzzer_pin, frequency);
   delay(duration);
 }
 
-void stopTone() {
+void buzzerStop() {
   noTone(buzzer_pin);
 }
 
 // plays a beep for when a button is pressed
 void buttonBuzzer() {
-  playTone(NOTE_C6, TONE_DELAY);
-  stopTone();
+  buzzerPlay(NOTE_C6, TONE_DELAY);
+  buzzerStop();
 }
 
 //plays a little tune indicating that what you did worked
 // C major
 void successBuzzer() {
-  playTone(NOTE_C6, TONE_DELAY);
-  playTone(NOTE_E6, TONE_DELAY);
-  playTone(NOTE_G6, TONE_DELAY);
-  stopTone();
+  buzzerPlay(NOTE_C6, TONE_DELAY);
+  buzzerPlay(NOTE_E6, TONE_DELAY);
+  buzzerPlay(NOTE_G6, TONE_DELAY);
+  buzzerStop();
   }
 
 // plays a failure sound
 // minor third between C and Eb
 void failureBuzzer() {
-  playTone(NOTE_Eb3, TONE_DELAY);
-  playTone(NOTE_C3, TONE_DELAY + 100);
-  stopTone();
+  buzzerPlay(NOTE_Eb3, TONE_DELAY);
+  buzzerPlay(NOTE_C3, TONE_DELAY + 100);
+  buzzerStop();
 }
 
 //tests each sound by linking it to a button
