@@ -46,7 +46,7 @@ char drinks[6][17] = {
     "Sweet Daquiri"
     };
 
-static void refreshDrinkMenu(const char* option) {
+static void refreshDrinkMenu(char* option) {
   lcdClear();
   lcdDisplayMenu("Select Drink", option, true, true);
   }
@@ -54,8 +54,22 @@ static void refreshDrinkMenu(const char* option) {
 char* currentDrink = drinks[0];
 
 
+
 void mainMenu() {
- 
+
+  while(1) {
+    refreshDrinkMenu(currentDrink);
+    if (buttonLeftPressed && currentDrink == drinks[0]) {
+      currentDrink = drinks[5];
+    } else if (buttonRightPressed && currentDrink == drinks[5]) {
+      currentDrink = drinks[0];
+    } else if (buttonLeftPressed) {
+      currentDrink - 1;
+    } else if (buttonRightPressed) {
+      currentDrink + 1;
+    }
+    
+  }
 }
 
 
