@@ -14,7 +14,7 @@ void modeDisplayDistance() {
       snprintf(message, 16, "%.d cm", distance);
     }
     lcdClear();
-    if (cupInPlace(distance)) {
+    if (proximityIsCupDetected()) {
       lcdPrintCentered("Glass in place", 0);
     } else {
       lcdPrintCentered("Place Glass", 0);
@@ -45,14 +45,7 @@ static void refreshDebugMenu(const char* option) {
   lcdDisplayMenu("Debug Menu", option, true, true);
 }
 
-void testProgress() {
-  lcdClear();
-  for (int i = 0; i <= 100; i+=1) {
-    lcdDisplayProgress(i, 0);
-    lcdDisplayProgress(i, 1);
-    delay(500);
-  }
-}
+
 
 void modeDebugMenu() {
   uint8_t optionIndex = 0;
@@ -80,7 +73,7 @@ void modeDebugMenu() {
     glassLedOff,
     bottleLedOn,
     bottleLedOff,
-    testProgress,
+    NULL,
     NULL, // manual pour 1
     NULL, // manual pour 2
     NULL, // manual pour 3
