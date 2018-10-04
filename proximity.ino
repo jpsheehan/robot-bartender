@@ -33,6 +33,7 @@ long proximityGetDistance() {
 // proximityIsCupDetected returns true if a cup is detected based on the MINIMUM_DISTANCE
 //   and MAXIMUM_DISTANCE macros
 bool proximityIsCupDetected() {
+  long distance = proximityGetDistance();
   return (distance >= MINIMUM_DISTANCE && distance <= MAXIMUM_DISTANCE);
 }
 
