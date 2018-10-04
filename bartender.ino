@@ -6,6 +6,9 @@
 DMTimer bottleLedTimer(1000000);
 DMTimer glassProximityTimer(100000);
 
+      DMTimer checkForCupTimeout(5000000); // 5 second timer
+       DMTimer glassLedTimer(250000); // 0.25 second timer
+
 void displayWelcomeMessage() {
     lcdClear();
     lcdPrintCentered("Welcome to the", 0);
@@ -22,7 +25,7 @@ void displayWelcomeMessage() {
 }
 
 void setup() {
-  Serial.begin(9600);
+  
     // setup the relays
     uint8_t relayPins[NUM_RELAYS] = {11, 10, 9, 8, 7, 6, 5, 4};
     relaySetup(NUM_RELAYS, relayPins); // set the relays up on the relayPins
@@ -30,9 +33,9 @@ void setup() {
     buttonSetup(2, 1, 0); // set the buttons up on pins 0, 1 and 2
     proximitySetup(12, 13); // set the proximity sensor up on pins 12 and 13
     buzzerSetup(3); // set the buzzer up on pin 3
-    // bottleLedOn();
+    bottleLedOn();
     displayWelcomeMessage();
-    // bottleLedOff();
+    bottleLedOff();
 }
 
 void loop() {
@@ -105,11 +108,13 @@ void mainMenu() {
       }
        refreshDrinkMenu(drinks[drinkIndex]);
     } else if (buttonCentrePressed()) {
-        bottleLedOff();
-        
-      DMTimer checkForCupTimeout(5000000); // 5 second timer
-      DMTimer glassLedTimer(250000); // 0.25 second timer
-      
+         bottleLedOff();
+
+      checkForCupTimeout.reset();
+      glassLedTimer.reset();
+
+      lcdClear();
+      lcdPrintCentered("Insert Glass", 0);
       bool foundCup = false;
       glassLedOff();
 
@@ -120,14 +125,12 @@ void mainMenu() {
           break;
         }
 
-        Serial.println("Waiting");
-
         if (glassLedTimer.isTimeReached()) {
           glassLedToggle();
         }
       }
       
-      if (foundCup) {
+      if (proximityIsCupDetected()) {
         glassLedOn();
         successBuzzer();
         lcdClear();
