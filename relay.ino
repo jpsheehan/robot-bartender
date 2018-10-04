@@ -1,15 +1,24 @@
 #include <stdbool.h>
 
+// set this to true if we want to force only one relay on at a time
+#define ALLOW_ONLY_ONE_RELAY_ON_AT_A_TIME false
+
 // relays stores the pin mapping for the relays
 static uint8_t *relays;
 
 // num_relays stores the number of relays that exist
 static uint8_t num_relays;
 
+// some useful definitions for this file
 #define RELAY_OFF HIGH
 #define RELAY_ON LOW
 
 #define RELAY_SAFETY_TIMEOUT 50
+
+#if ALLOW_ONLY_ONE_RELAY_ON_AT_A_TIME
+  #define NO_RELAY 0
+  static uint8_t current_relay = NO_RELAY;
+#endif
 
 // relaySetup initialises s relays on the pins supplied and turns them off.
 // 
@@ -38,6 +47,12 @@ bool relaySetup(uint8_t s, uint8_t pins[]) {
 // 
 // n is the relay number to turn on
 void relayTurnOn(uint8_t n) {
+    #if ALLOW_ONLY_ONE_RELAY_ON_AT_A_TIME
+      if (current_relay != NO_RELAY) {
+        relayTurnOff(current_relay);
+      }
+      current_relay = n;
+    #endif
     digitalWrite(relays[n - 1], RELAY_ON);
 }
 
@@ -46,6 +61,9 @@ void relayTurnOn(uint8_t n) {
 // n is the relay number to turn off.
 void relayTurnOff(uint8_t n) {
     digitalWrite(relays[n - 1], RELAY_OFF);
+    #if ALLOW_ONLY_ONE_RELAY_ON_AT_A_TIME
+      current_relay = NO_RELAY;
+    #endif
     delay(RELAY_SAFETY_TIMEOUT);
 }
 
@@ -65,6 +83,7 @@ void relayTestIndividual() {
    }
 }
 
+// relayTestStress2 tests each of the individual relays that are known good
 void relayTestStress2() {
   bool state = false;
   lcdClear();
