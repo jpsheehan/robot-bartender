@@ -20,6 +20,8 @@ static uint8_t num_relays;
   static uint8_t current_relay = NO_RELAY;
 #endif
 
+#define DISALLOW_RELAY_3_AND_6 false
+
 // relaySetup initialises s relays on the pins supplied and turns them off.
 // 
 // s is the length of the pins array.
@@ -36,9 +38,11 @@ bool relaySetup(uint8_t s, uint8_t pins[]) {
 
     for (uint8_t i = 0; i < s; i++) {
         // DO NOT SETUP RELAYS 3 AND 6!!!
-        if (i == 3 - 1 || i == 6 - 1) {
-          continue;
-        }
+        #if DISALLOW_RELAY_3_AND_6
+          if (i == 3 - 1 || i == 6 - 1) {
+            continue;
+          }
+        #endif
         relays[i] = pins[i];
         pinMode(relays[i], OUTPUT);
         relayTurnOff(i + 1);
@@ -61,9 +65,13 @@ void relayTurnOn(uint8_t n) {
     // our relays number 3 and 6 are cooked, if we attempt to use them we reset the Arduino.
     // always ignore requests to turn on relays 3 and 6.
     // VERY IMPORTANT!!!
-    if (n != 3 && n != 6) {
-       digitalWrite(relays[n - 1], RELAY_ON);
-    }
+    #if DISALLOW_RELAY_3_AND_6
+      if (n == 3 || n == 6) {
+        return;
+      }
+    #endif
+    
+    digitalWrite(relays[n - 1], RELAY_ON);
 }
 
 // relayTurnOff turns off the nth relay safely. relay numbers start at 1.
