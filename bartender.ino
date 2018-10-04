@@ -91,9 +91,13 @@ void mainMenu() {
       }
     } else if (buttonCentrePressed()) {
       successBuzzer();
+      if (proximityIsCupDetected()) {
       timeForADrink(drinkIndex);
-    } 
+    } else { 
+      failureBuzzer();
     }
+}
+  }
 }
 
 
