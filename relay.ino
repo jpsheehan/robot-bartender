@@ -20,7 +20,7 @@ static uint8_t num_relays;
   static uint8_t current_relay = NO_RELAY;
 #endif
 
-#define DISALLOW_RELAY_3_AND_6 false
+#define DISALLOW_RELAY_3_AND_6 true
 
 // relaySetup initialises s relays on the pins supplied and turns them off.
 // 
