@@ -1,5 +1,5 @@
-#define MINIMUM_DISTANCE 4
-#define MAXIMUM_DISTANCE 6
+#define MINIMUM_DISTANCE 2
+#define MAXIMUM_DISTANCE 12
 
 static uint8_t triggerPin;
 static uint8_t echoPin;

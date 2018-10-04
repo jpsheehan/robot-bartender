@@ -1,10 +1,10 @@
 #include <stdbool.h>
+#include <dmtimer.h>
 
 #define NUM_RELAYS 8
 
-char prompt[] = "Select Drink";
-
-
+DMTimer bottleLedTimer(1000000);
+DMTimer glassProximityTimer(100000);
 
 void displayWelcomeMessage() {
     lcdClear();
@@ -12,7 +12,7 @@ void displayWelcomeMessage() {
     lcdPrintCentered("Bot-Tender", 1);
     successBuzzer();
     
-    delay(1000);
+    delay(2000);
 
     // Launch the debug menu if the left and right buttons are held down
     if (buttonLeftPressedRaw() && buttonRightPressedRaw()) {
@@ -22,6 +22,7 @@ void displayWelcomeMessage() {
 }
 
 void setup() {
+  Serial.begin(9600);
     // setup the relays
     uint8_t relayPins[NUM_RELAYS] = {11, 10, 9, 8, 7, 6, 5, 4};
     relaySetup(NUM_RELAYS, relayPins); // set the relays up on the relayPins
@@ -29,9 +30,9 @@ void setup() {
     buttonSetup(2, 1, 0); // set the buttons up on pins 0, 1 and 2
     proximitySetup(12, 13); // set the proximity sensor up on pins 12 and 13
     buzzerSetup(3); // set the buzzer up on pin 3
-
+    bottleLedOn();
     displayWelcomeMessage();
-    
+    bottleLedOff();
 }
 
 void loop() {
@@ -51,8 +52,8 @@ static void refreshDrinkMenu(const char* option) {
   lcdDisplayMenu("Select Drink", option, true, true);
   }
 
-// char* currentDrink = drinks[0];
 int drinkIndex = 0;
+
 
 void timeForADrink(int option) {
   if (option == 0) {
@@ -76,6 +77,19 @@ void mainMenu() {
    refreshDrinkMenu(drinks[drinkIndex]);
   while(1) {
     buttonUpdate();
+
+    if (bottleLedTimer.isTimeReached()) {
+      bottleLedToggle();
+    }
+
+    if (glassProximityTimer.isTimeReached()) {
+      if (proximityIsCupDetected()) {
+        glassLedOn();
+      } else {
+        glassLedOff();
+      }
+    }
+    
     if (buttonLeftPressed()) {
       buttonBuzzer();
       drinkIndex -= 1;
@@ -91,12 +105,35 @@ void mainMenu() {
       }
        refreshDrinkMenu(drinks[drinkIndex]);
     } else if (buttonCentrePressed()) {
+        bottleLedOff();
+        
+      DMTimer checkForCupTimeout(5000000); // 5 second timer
+      DMTimer glassLedTimer(250000); // 0.25 second timer
       
-      if (proximityIsCupDetected()) {
+      bool foundCup = false;
+      glassLedOff();
+
+      // flash the glass LEDs
+      while (!checkForCupTimeout.isTimeReached()) {
+        if (proximityIsCupDetected()) {
+          foundCup = true;
+          break;
+        }
+
+        Serial.println("Waiting");
+
+        if (glassLedTimer.isTimeReached()) {
+          glassLedToggle();
+        }
+      }
+      
+      if (foundCup) {
+        glassLedOn();
         successBuzzer();
-      timeForADrink(drinkIndex);
+        timeForADrink(drinkIndex);
     } else { 
       failureBuzzer();
+      glassLedOff();
     }
 }
   }
