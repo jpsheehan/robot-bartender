@@ -1,9 +1,9 @@
-#define WHISKEY 1
-#define COKE 4
+#define WHISKEY 2
+#define COKE 5
 #define SYRUP 3
-#define RUM 2
+#define RUM 4
 #define LIMEJUICE 6
-#define SODA 5
+#define SODA 1
 
 #define SINGLE 5000
 
@@ -14,9 +14,9 @@ void pourWhiskey(float size) {
 }
 
 void pourCoke(float size) {
-  relayTurnOn(COKE);
+  relayTurnOn(SYRUP);
   delay(SINGLE * size);
-  relayTurnOff(COKE);
+  relayTurnOff(SYRUP);
 }
 
 void pourSyrup(float size) {
@@ -38,9 +38,9 @@ void pourLimeJuice(float size) {
 }
 
 void pourSoda(float size) {
-  relayTurnOn(SODA);
+  relayTurnOn(COKE);
   delay(SINGLE * size);
-  relayTurnOff(SODA);
+  relayTurnOff(COKE);
 }
 
 
