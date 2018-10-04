@@ -49,21 +49,43 @@ void relayTurnOff(uint8_t n) {
     delay(RELAY_SAFETY_TIMEOUT);
 }
 
+// relayTurnOffAll turns off all the relays safely.
 void relayTurnOffAll() {
   for (uint8_t i = 1; i <= num_relays; i++) {
     relayTurnOff(i);
   }
 }
 
+// relayTestIndividual tests each relay individually with a 1 second delay between each of them
 void relayTestIndividual() {
    for (uint8_t i = 1; i <= 6; i++) {
       relayTurnOn(i);
       delay(1000);
       relayTurnOff(i);
    }
-     
 }
 
+void relayTestStress2() {
+  bool state = false;
+  lcdClear();
+  lcdPrintCentered("Stress Test 2", 0);
+  lcdPrintCentered("Hold any button", 1);
+  
+  while (!buttonAnyPressed()) {
+   for (uint8_t i = 1; i <= 6; i++) {
+      relayTurnOn(1);
+      relayTurnOn(2);
+      relayTurnOn(4);
+      relayTurnOn(5);
+      delay(500);
+      relayTurnOffAll();
+   }
+    buttonUpdate();
+  }
+  relayTurnOffAll();
+}
+
+// relayTestStress tests all the relay
 void relayTestStress() {
   bool state = false;
   lcdClear();

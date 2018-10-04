@@ -38,7 +38,7 @@ void modeDisplayButtons() {
    }
 }
 
-#define DEBUG_NUM_OPTIONS 13
+#define DEBUG_NUM_OPTIONS 14
 
 static void refreshDebugMenu(const char* option) {
   lcdClear();
@@ -71,6 +71,7 @@ void modeDebugMenu() {
     "Manual 5",
     "Manual 6",
     "Stress Test 1",
+    "Stress Test 2"
   };
 
   void (*optionFunctions[DEBUG_NUM_OPTIONS])() = {
@@ -87,6 +88,7 @@ void modeDebugMenu() {
     NULL, // manual pour 5
     NULL, // manual pour 6
     relayTestStress,
+    relayTestStress2
   };
   
   refreshDebugMenu(options[optionIndex]);
