@@ -1,8 +1,8 @@
 #define WHISKEY 1
-#define COKE 6
-#define SYRUP 2
-#define RUM 3
-#define LIMEJUICE 4
+#define COKE 4
+#define SYRUP 3
+#define RUM 2
+#define LIMEJUICE 6
 #define SODA 5
 
 #define SINGLE 5000
