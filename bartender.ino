@@ -46,12 +46,28 @@ char drinks[6][17] = {
     "Sweet Daquiri"
     };
 
-static void refreshDrinkMenu(char* option) {
+static void refreshDrinkMenu(const char* option) {
   lcdClear();
   lcdDisplayMenu("Select Drink", option, true, true);
   }
 
 char* currentDrink = drinks[0];
+
+void timeForADrink(const char* option) {
+  if (option == drinks[0]) {
+    whiskeyAndCoke();
+  } else if (option == drinks[1]) {
+    mojito();
+  } else if (option == drinks[2]) {
+    rumAndCoke();
+  } else if (option == drinks[3]) {
+    snakebite();
+  } else if (option == drinks[4]) {
+    mapleNutShot();
+  } else if (option == drinks[5]) {
+    sweetDaquiri();
+  }
+}
 
 
 
@@ -67,9 +83,12 @@ void mainMenu() {
       currentDrink - 1;
     } else if (buttonRightPressed) {
       currentDrink + 1;
+    } else if (buttonCentrePressed) {
+      timeForADrink(currentDrink);
     }
-    
-  }
+      
+      
+    }
 }
 
 
